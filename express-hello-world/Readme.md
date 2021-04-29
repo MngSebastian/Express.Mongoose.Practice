@@ -9,7 +9,7 @@ app.use(express.static('public'))
  3. Create Route
 app.get('/', (req, res, next) => {
 // console.log(req)
-res.send('<h1>Welcome Ironhacker. :)</h1>');
+res.send('<h1>Welcome</h1>');
 })
 
  4. Tell our server to continuously listen for requests on port 3000. Start server.
