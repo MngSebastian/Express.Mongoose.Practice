@@ -13,7 +13,7 @@ app.use(express.static('public'))
 // 3. Create Route
 app.get('/', (req, res, next) => {
     // console.log(req)
-    res.send('<h1>Welcome Ironhacker. :)</h1>');
+    res.sendFile(__dirname + '/views/home-page.html');
 })
 
 
@@ -24,19 +24,5 @@ app.listen(4000, () => {
 
 
 app.get('/cat', (req, res, next) =>{
-    res.send(`
-    <!doctype html>
-    <html>
-      <head>
-        <meta charset="utf-8">
-        <title>Cat</title>
-        <link rel="stylesheet" href="/stylesheets/style.css" />
-      </head>
-      <body>
-        <h1>Caaat</h1>
-        <p>This is my second route</p>
-        <img src="/images/cool-cat.jpg" />
-      </body>
-    </html>
-  `)
+    res.sendFile(__dirname + '/views/cat-page.html')
 })

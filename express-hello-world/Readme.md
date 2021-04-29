@@ -27,3 +27,13 @@ console.log('My app listening on port 4000.')
 
 7. Make everything inside of public/ available
    app.use(express.static('public'))
+
+8. Created Cat route.
+
+9. in order to not have to much html in our routes, i create a views folder for all of our html files
+
+Once i have the html views ready i can change my routes to
+app.get('/cat', (request, response, next) => {
+response.sendFile(\_\_dirname + '/views/cat-page.html');
+});
+dirname should not have left slash, it adds itself on save for some reason.
