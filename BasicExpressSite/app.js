@@ -16,13 +16,13 @@ app.get('/', (req, res, next) => {
 
 // Create About route
 app.get('/about', (req, res, next) => {
-    res.sendFile(__dirname + '/views')
+    res.sendFile(__dirname + '/views/about.html')
 })
 
 
 // Create Works route
 app.get('/works', (req, res, next) => {
-    res.sendFile(__dirname + '/views')
+    res.sendFile(__dirname + '/views/works.html')
 })
 
 
