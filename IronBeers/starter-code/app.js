@@ -18,27 +18,12 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-app.get('/beers', (req, res) => {
-  punkAPI
-    .getBeers()
-    .then(beersFromApi => {
-      //console.log('Beers from the database: ', beersFromApi);
-      res.render('beers.hbs', { beers: beersFromApi });
-    })
-    .catch(error => console.log(error));
-  //   res.send([{ a: beersFromApi }]);
+app.get('/beers', (req, res, next) => {
+  res.render('beers')
+})
 
-  // res.render('beers.hbs', { beers: beersFromApi });
-});
-
-app.get('/random-beers', (req, res) => {
-  punkAPI
-    .getRandom()
-    .then(responseFromAPI => {
-      //console.log('Beers from the database: ', beersFromApi);
-      res.render('randombeer.hbs', { randomBeer: responseFromAPI });
-    })
-    .catch(error => console.log(error));
-});
+app.get('/random-beer', (req, res, next) => {
+  res.render('random-beer')
+})
 
 app.listen(3000, () => console.log('🏃‍ on port 3000'));
