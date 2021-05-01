@@ -9,7 +9,9 @@
 
 <body>
     <div class="cards-container">
-        {{> playerCard}}
+        {{#each players}}
+        {{> playerCard this}}
+        {{/each}}
     </div>
 </body>
 
