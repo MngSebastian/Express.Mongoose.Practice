@@ -43,6 +43,13 @@ mongoose
   .then(recipe => {
     console.log(`Duration has been changed to: ${recipe.duration}`)
   })
+  // Delete One
+  .then(() => {
+    return Recipe.deleteOne({title: 'Carrot Cake'})
+  })
+  .then( () => {
+    console.log(`Recipe has been deleted`)
+  })
   .catch(error => {
     console.error('Error connecting to the database', error);
   });
