@@ -1,0 +1,7 @@
+ {{#each tracks}}
+    <p>{{name}}</p>
+    {{!-- <a href="/album/{{id}}">View Tracks</a> --}}
+    <audio controls>
+        <source src="{{preview_url}}" type="audio/ogg">
+    </audio>
+{{/each}}
