@@ -17,4 +17,16 @@ router.get('/movies', (req, res, next) => {
       })
   });
 
+//   Get Movie Details
+router.get('/movie/:movieId', (req, res, next) => {
+    Movie.findById(req.params.movieId)
+      .then(movie => {
+        // console.log('Retrieved movie from DB:', movie);
+        res.render('movie-details', { movie: movie})
+      })
+      .catch(error => {
+        console.log('Error while getting the movie from the DB: ', error);
+      })
+  });
+
 module.exports = router;
