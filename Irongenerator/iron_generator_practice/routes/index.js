@@ -20,4 +20,16 @@ router.get('/books', (req, res, next) => {
     })
 });
 
+router.get('/books/:bookId', (req, res, next) => {
+  // find one by id
+  Book.findById(req.params.bookId)
+    .then(book => {
+      // console.log('Retrieved books from DB:', allTheBooksFromDB);
+      res.render('book-details', { book: book})
+    })
+    .catch(error => {
+      console.log('Error while getting the books from the DB: ', error);
+    })
+});
+
 module.exports = router;

@@ -1,5 +1,6 @@
 <p>Books</p>
 
 {{#each books}}
-    <p>{{this.title}}</p>
+    <a href="/books/{{this._id}}">{{this.title}}</a>
+    <br>
 {{/each}}
