@@ -9,6 +9,41 @@ router.get('/', (req, res, next) => {
   res.render('index');
 });
 
+router.get('/books/add', (req, res, next) => {
+  res.render('book-add')
+})
+
+
+router.post('/books/add', (req, res, next) => {
+  // Destructuring the data, this only works because the names are exactly the same in the form.
+  const { title, author, description, rating } = req.body
+
+  // Create new instance of book.
+  const newBook = new Book ({ title, author, description, rating })
+
+  // Save the new Book or throw an error if something goes wrong.
+  newBook.save()
+  .then((book) => {
+    res.redirect('/books')
+  })
+  .catch ((error) => {
+    console.log(error)
+  })
+})
+
+
+router.get('/books/edit', (req, res, next) => {
+  Book.findOne({_id: req.query.book_id})
+  .then((book) => {
+    res.render("book-edit", {book});
+    console.log(book)
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+});
+
+
 router.get('/books', (req, res, next) => {
   Book.find()
     .then(allTheBooksFromDB => {
@@ -31,5 +66,6 @@ router.get('/books/:bookId', (req, res, next) => {
       console.log('Error while getting the books from the DB: ', error);
     })
 });
+
 
 module.exports = router;
