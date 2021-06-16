@@ -43,6 +43,18 @@ router.get('/books/edit', (req, res, next) => {
   })
 });
 
+router.post('/books/edit', (req, res, next) => {
+  const { title, author, description, rating } = req.body
+
+  Book.update({_id: req.query.book_id}, {$set: {title, author, description, rating }}, { new: true})
+  .then((book) => {
+    res.redirect('/books')
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+})
+
 
 router.get('/books', (req, res, next) => {
   Book.find()
