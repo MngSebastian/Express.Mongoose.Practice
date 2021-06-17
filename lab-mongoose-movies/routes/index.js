@@ -20,6 +20,19 @@ router.get('/celebrities', (req, res, next) => {
   })
 })
 
+
+// Get Celebrity by id
+router.get('/celebrities/:celebId', (req, res, next) => {
+  // find by id from db
+  Celebrity.findById(req.params.celebId)
+  .then(celebrity => {
+    res.render('celebrities/show.hbs', { celebrity: celebrity})
+  })
+  .catch(error => {
+    console.log(error)
+  })
+})
+
 module.exports = router;
 
 
