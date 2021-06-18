@@ -66,11 +66,12 @@ router.get('/celebrities/:celebId/edit', (req, res, next) => {
 })
 
 router.post('/celebrities/:celebId/edit', (req, res, next) => {
-  const {name, occupation, catchphrase} = req.params
+  const {name, occupation, catchphrase} = req.body
+  console.log(req.params)
   Celebrity.findByIdAndUpdate(req.params.celebId, {name, occupation, catchphrase})
   
   .then((celebrity) => {
-    res.redirect('celebrities')
+    res.redirect('/celebrities')
   })
   .catch((err) => {
     console.log(err)
