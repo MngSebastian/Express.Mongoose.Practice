@@ -42,12 +42,23 @@ newCelebrity.save()
 })
 })
 
+// Delete Celebrity
+router.post('/celebrities/:celebid/delete', (req, res, next) => {
+  const id = req.params.celebid
+  Celebrity.findByIdAndRemove(id)
+  .then((data) => {
+    res.redirect('/celebrities')
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+})
 
 // Get Celebrity by id
 router.get('/celebrities/:celebId', (req, res, next) => {
   // find by id from db
   const id = req.params.celebId
-  console.log('objectid', id)
+  // console.log('objectid', id)
   Celebrity.findById(id)
   .then(celebrity => {
     res.render('celebrities/show.hbs', { celebrity: celebrity})
