@@ -54,6 +54,31 @@ router.post('/celebrities/:celebid/delete', (req, res, next) => {
   })
 })
 
+// Edit Celebrities
+router.get('/celebrities/:celebId/edit', (req, res, next) => {
+  Celebrity.findById(req.params.celebId)
+  .then((celebrity) => {
+    res.render('celebrities/edit', {celebrity: celebrity})
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+})
+
+router.post('/celebrities/:celebId/edit', (req, res, next) => {
+  const {name, occupation, catchphrase} = req.params
+  Celebrity.findByIdAndUpdate(req.params.celebId, {name, occupation, catchphrase})
+  
+  .then((celebrity) => {
+    res.redirect('celebrities')
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+})
+
+
+
 // Get Celebrity by id
 router.get('/celebrities/:celebId', (req, res, next) => {
   // find by id from db
