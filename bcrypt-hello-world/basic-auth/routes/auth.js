@@ -9,11 +9,24 @@ const bcryptSalt     = 10;
 
 
 router.post("/signup", (req, res, next) => {
+
+
+
+
+  
+  
+  
   const username = req.body.username;
   const password = req.body.password;
   const salt     = bcrypt.genSaltSync(bcryptSalt);
   const hashPass = bcrypt.hashSync(password, salt);
- 
+  
+  if (username === "" || password === "") {
+    res.render("auth/signup", {
+      errorMessage: "Indicate a username and a password to sign up"
+    });
+    return;
+  }
   User.create({
     username,
     password: hashPass
@@ -32,7 +45,6 @@ router.post("/signup", (req, res, next) => {
 router.get('/', (req, res, next) => {
   res.render('index');
 });
-
 
 
 // Signup Form
