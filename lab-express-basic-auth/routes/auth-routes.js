@@ -38,8 +38,48 @@ router.post('/signup', (req, res, next) => {
     .catch(error => next(error));
 });
 
-router.get('/userProfile', (req, res, next) => {
-    res.render('userProfile')
+router.get('/userProfile', (req, res) => {
+  res.render('userProfile', { userInSession: req.session.currentUser });
+});
+
+
+router.get('/login', (req, res, next) => {
+  res.render('login')
 })
 
+router.post('/login', (req, res, next) => {
+  const { email, password } = req.body
+  console.log('SESSION =====> ', req.session);
+
+
+  // Form Validation
+  if (email === '' || password === '') {
+    res.render('login', {
+      errorMessage: 'Please enter both, email and password to login.'
+    });
+    return;
+  }
+
+  User.findOne({ email })
+    .then(user => {
+      if (!user) {
+        res.render('login', { errorMessage: 'Email is not registered. Try with other email.' });
+        return;
+      } else if (bcryptjs.compareSync(password, user.passwordHash)) {
+        req.session.currentUser = user;
+        res.redirect('/userProfile');
+      } else {
+        res.render('login', { errorMessage: 'Incorrect password.' });
+      }
+    })
+    .catch(error => next(error));
+});
+
+
+router.post('/logout', (req, res, next) => {
+  req.session.destroy((err) => {
+    if (err) next(err);
+    res.redirect('/');
+  })
+});
 module.exports = router
